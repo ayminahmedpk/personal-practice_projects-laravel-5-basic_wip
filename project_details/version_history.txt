@@ -1,5 +1,9 @@
 
 
+0.0.1
+  - Basic file uploading and saving working
+
+
 "init"
 - Basic testing to ensure everything works as expected
 - Recreated users, some new posts

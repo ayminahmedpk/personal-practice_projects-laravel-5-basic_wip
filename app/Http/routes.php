@@ -11,19 +11,27 @@
 |
 */
 
+
+use App\Http\Controllers\PagesController;
+
+
 Route::get('/', function () {
     return view('welcome');
     // return ('welp');
 });
 
 
-// Route::get('/about', function () {
-//     return view('pages.about');
-// });
-
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
+
+Route::get('/uploadTest', 'PagesController@uploadTest');
+
+// Route::post('', 'PagesController@receiveImage');
+
+// is this necessary when we're calling PagesController@receiveImage directly
+// in the form action?
+Route::post('/receiveImage', 'PagesController@receiveImage');
 
 Route::resource('posts', 'PostsController');
 Route::auth();

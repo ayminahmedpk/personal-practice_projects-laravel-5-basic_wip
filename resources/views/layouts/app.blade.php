@@ -54,6 +54,7 @@
                     <li><a href="/laravel_test/public/about">About</a></li>
                     <li><a href="/laravel_test/public/services">Services</a></li>
                     <li><a href="/laravel_test/public/posts">Blog</a></li>
+                    <li><a href="/laravel_test/public/uploadTest">Upload Test</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
