@@ -1,0 +1,4 @@
+
+
+To learn laravel in a separate environment (bringing in our code and going
+further)

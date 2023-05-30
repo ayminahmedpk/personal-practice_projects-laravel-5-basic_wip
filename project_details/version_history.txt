@@ -1,0 +1,8 @@
+
+
+"init"
+- Basic testing to ensure everything works as expected
+- Recreated users, some new posts
+- Redid migrations
+- Made changes (such as links)
+- Brought in our code
