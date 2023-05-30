@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\File;
+
 use App\Http\Requests;
 
 use App\Post;
+
+use Auth;
+
 
 
 class PostsController extends Controller {
@@ -58,14 +63,33 @@ class PostsController extends Controller {
     {
         $this->validate($request, [
             'title' => 'required',
-            'body'  => 'required'
+            'body'  => 'required',
+            // 'cover_image' => 'image|nullable|max:1999'
+            'cover_image' => 'image|max:1999'
         ]);
 
+        if ($request->hasFile('cover_image')) {
+          $fileHandle = $request->file('cover_image');
+          $fileContents = $request->get('cover_image');
+
+          $filenameWithExt = $fileHandle->getClientOriginalName();
+          $filename = pathInfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $fileHandle->getClientOriginalExtension(); 
+
+          $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+          
+          $fileHandle->move(public_path('/images'), $fileNameToStore);
+        }
+        else {
+          $fileNameToStore = 'noimage.jpg';
+        }
+
+
         $post = new Post;
-        
         $post->title = $request->input('title');
         $post->body  = $request->input('body');
         $post->user_id = auth()->user()->id;
+        $post->cover_image = $fileNameToStore;
 
         $post->save();
 
@@ -98,7 +122,7 @@ class PostsController extends Controller {
 
         // If logged in and directely browsed to link /post/{id}/edit, could
         // edit another user's post. This if block restricts it.
-        if(auth()->user->id !== $post->user_id) {
+        if(auth()->user()->id !== $post->user_id) {
             return redirect('/posts')->with('error', 'Access denied');
         }
 
@@ -148,8 +172,13 @@ class PostsController extends Controller {
 
         // If logged in and directely browsed to link /post/{id}/delete, could
         // delete another user's post. This if block restricts it.
-        if(auth()->user->id !== $post->user_id) {
+        if(auth()->user()->id !== $post->user_id) {
             return redirect('/posts')->with('error', 'Access denied');
+        }
+
+        if($post->cover_image != 'noimage.jpg') {
+          // delete image file
+          File::delete(public_path() . '/images\/' . $post->cover_image);
         }
 
         $post->delete();

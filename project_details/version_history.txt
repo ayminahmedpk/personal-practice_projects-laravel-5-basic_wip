@@ -1,12 +1,16 @@
 
+0.0.2
+  - Rendering image on a view
+  - Image upload crud working (only create and delete implemented for image)
+
 
 0.0.1
   - Basic file uploading and saving working
 
 
 "init"
-- Basic testing to ensure everything works as expected
-- Recreated users, some new posts
-- Redid migrations
-- Made changes (such as links)
-- Brought in our code
+  - Basic testing to ensure everything works as expected
+  - Recreated users, some new posts
+  - Redid migrations
+  - Made changes (such as links)
+  - Brought in our code

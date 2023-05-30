@@ -14,12 +14,20 @@
       <button>
         <a href="/laravel_test/public/posts/create">New</a>
       </button>
+      <br><br>
     @endif
 
 
     @if(count($posts) > 0)
 
       @foreach ($posts as $post)
+        <div>
+          <img
+            src="/laravel_test/public/images/{{$post->cover_image}}"
+            alt=""
+            style="height:100px; width:100px; display:block;"
+          >
+        </div>
         <h3>
           <a href="/laravel_test/public/posts/{{$post->id}}">{{$post->title}}</a>
         </h3>
