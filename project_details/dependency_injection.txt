@@ -1,0 +1,48 @@
+
+
+Dependency injection in the context of Laravel.
+
+
+In OOP, we can have inheritance and composition.
+
+In inheritance, we have a child class inherit functionality from a parent class
+and use it naturally as if it were its own functionality.
+
+In composition, we have a consumer class instantiate an object of a provider
+class, and use that object to do something within its code.
+
+
+Usually, in composition OOP, we do this:
+
+1. Define provider class
+2. Define consumer class
+   2a. Create provider class instance in consumer class code
+   2b. Use provider class instance in consumer class code
+3. Create functionality instance, which will internally create and use
+   provider class code
+
+
+
+With dependency injection, at least in the context of Laravel, it seems the
+flow is slightly altered, as follows:
+
+1. Define provider class
+2. Define consumer class
+   2a. Set up the INJECTION of a provider class instance into a variable in the
+       consumer class code
+   2b. Use provider class instance in consumer class code
+3. At runtime, the program or environment will INJECT (somehow insert) a
+   provider class instance into the relevant variable of the consumer class.
+
+
+Why is this done?
+
+Probably because the mechanism which performs the injection adds some extra
+features or specific behavior (uses a singleton for multiple injections, adds
+some optimization or debugging features, less coupling between consumer and
+provider, etc).
+
+This is essentially an example of inheritance vs composition as discussed when
+learning the Bridge design pattern. This may be done to get around PHP's single
+inheritance restriction. Traits (keyword 'use') are themselves a common way to
+get around PHP's single inheritance.
