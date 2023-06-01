@@ -6,31 +6,32 @@
 
 
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 <title>{{env('APP_NAME', 'fallback')}}</title>
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 https://laravel.com/docs/5.2/quickstart
 
 ... form action="{{ url('task') }}" ...
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 url path could be an environment variable?
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-"The view function accepts a second argument
-which is an array of data that will be made available to the view,
-where each key in the array will become a variable within the view"
+"The view function accepts a second argument which is an array of data that
+ will be made available to the view, where each key in the array will become a
+ variable within the view"
 
 	return view('tasks', ['tasks' => $tasks]);
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-We can use implicit model binding to automatically retrieve the Task model that corresponds to the {task} route parameter.
+We can use implicit model binding to automatically retrieve the Task model that
+corresponds to the {task} route parameter.
 
   Route::delete('/task/{task}', function (Task $task) {
     $task->delete();
@@ -39,37 +40,44 @@ We can use implicit model binding to automatically retrieve the Task model that 
 
 (passed to it was action="{{ url('task/'.$task->id) }}" )
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-It is also necessary to update the app/Http/Middleware/RedirectIfAuthenticated.php file with the proper redirect path
+It is also necessary to update the app/Http/Middleware/RedirectIfAuthenticated-
+.php file with the proper redirect path
 
 Note: Our current one was
         if (Auth::guard($guard)->check()) { return redirect('/'); }
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-The $errors variable is available in every Laravel view. It will simply be an empty instance of ViewErrorBag if no validation errors are present.
+The $errors variable is available in every Laravel view. It will simply be an
+empty instance of ViewErrorBag if no validation errors are present.
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-Most of Laravel's relationships expose a create method, which accepts an array of attributes and will automatically set the foreign key value on the related model before storing it in the database.
+Most of Laravel's relationships expose a create method, which accepts an array
+of attributes and will automatically set the foreign key value on the related
+model before storing it in the database.
 
-In this case, the create method will automatically set the user_id property of the given task to the ID of the currently authenticated user, which we are accessing using
-$request->user()
+In this case, the create method will automatically set the user_id property of
+the given task to the ID of the currently authenticated user, which we are
+accessing using $request->user()
 
   $request->user()->tasks()->create([
     'name' => $request->name,
   ]);
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 Dependency injection
 
--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-.
+<input type="hidden" name="_method" value="DELETE">
 
--------------------------------------------------------------------------------------------
+(feels cleaner than {{ method_field('Delete'); }} )
+
+-------------------------------------------------------------------------------
 
 .
 
